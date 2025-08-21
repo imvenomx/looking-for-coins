@@ -61,8 +61,8 @@ const regionNames: { [key: string]: string } = {
   br: 'Brazil'
 };
 
-export default function MatchPage({ params }: { params: { id: string } }) {
-  const id = params.id;
+export default async function MatchPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
   const { user } = useAuth();
   const router = useRouter();
   const [match, setMatch] = useState<Match | null>(null);
@@ -185,7 +185,7 @@ export default function MatchPage({ params }: { params: { id: string } }) {
       const newReadyState = !isReady;
       
       // Update ready state in database (you'll need to add a ready column to matches table)
-      const response = await fetch(`/api/matches/${params.id}/ready`, {
+      const response = await fetch(`/api/matches/${id}/ready`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -212,7 +212,7 @@ export default function MatchPage({ params }: { params: { id: string } }) {
       const { data: { session } } = await supabase.auth.getSession();
       if (!session?.access_token) return;
       
-      const response = await fetch(`/api/matches/${params.id}/submit-result`, {
+      const response = await fetch(`/api/matches/${id}/submit-result`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -625,7 +625,7 @@ export default function MatchPage({ params }: { params: { id: string } }) {
                                                                 const { data: { session } } = await supabase.auth.getSession();
                                                                 if (!session?.access_token) return;
                                                                 
-                                                                const response = await fetch(`/api/matches/${params.id}/start`, {
+                                                                const response = await fetch(`/api/matches/${id}/start`, {
                                                                     method: 'POST',
                                                                     headers: {
                                                                         'Content-Type': 'application/json',
