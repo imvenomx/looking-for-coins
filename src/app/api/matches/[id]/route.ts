@@ -18,10 +18,8 @@ export async function GET(
   request: NextRequest,
   context: { params: { id: string } }
 ) {
-  const { params } = context;
-  const { id } = params;
+  const id = context.params.id;
   try {
-    const { id } = await params;
 
     if (!id) {
       return NextResponse.json(
@@ -158,8 +156,7 @@ export async function DELETE(
   request: NextRequest,
   context: { params: { id: string } }
 ) {
-  const { params } = context;
-  const { id } = params;
+  const id = context.params.id;
   try {
     // Get the authorization header
     const authHeader = request.headers.get('authorization');
@@ -196,8 +193,6 @@ export async function DELETE(
         { status: 401 }
       );
     }
-
-    const { id } = await params;
 
     if (!id) {
       return NextResponse.json(
