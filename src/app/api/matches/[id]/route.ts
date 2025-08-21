@@ -155,8 +155,8 @@ export async function GET(_req: NextRequest, context: { params: Promise<{ id: st
   }
 }
 
-export async function DELETE(request: NextRequest, { params }: RouteCtx) {
-  const id = params.id;
+export async function DELETE(request: NextRequest, context: { params: Promise<{ id: string }> }) {
+  const { id } = await context.params;
 
   try {
     const authHeader = request.headers.get('authorization');
