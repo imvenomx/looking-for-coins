@@ -1,0 +1,30 @@
+@media screen and (min-width: 1559px){
+    .singlematch {
+        width: 29%;
+    }
+    .dscontent {
+        padding-left: 22%
+    }
+    .streams-block {
+        display: flex;
+        gap: 40px;
+    }
+    .leaderboard {
+        width: 24%;
+    }
+    .matchlist {
+        width: 73%;
+    }
+    .match-dash {
+        display: flex;
+        gap: 40px;
+        width: 85%;
+    }
+    .match-status-bar {
+        width: 65%;
+        margin-top: 35px;
+    }
+    .player-meta h3 {
+        font-size: 22px;
+    }
+}
