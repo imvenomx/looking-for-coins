@@ -20,7 +20,7 @@ export default function Store() {
               <div className="coming-soon-content">
                 <Image src="/assets/img/logo.png" alt="LFC Logo" width={120} height={120} />
                 <h2>Store Coming Soon!</h2>
-                <p>We're working hard to bring you an amazing store experience with exclusive items, cosmetics, and more.</p>
+                <p>We&apos;re working hard to bring you an amazing store experience with exclusive items, cosmetics, and more.</p>
                 <div className="notify-me">
                   <input type="email" placeholder="Enter your email to get notified" />
                   <button>Notify Me</button>
