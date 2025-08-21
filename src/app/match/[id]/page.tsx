@@ -61,8 +61,8 @@ const regionNames: { [key: string]: string } = {
   br: 'Brazil'
 };
 
-export default async function MatchPage({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = await params;
+export default function MatchPage({ params }: { params: { id: string } }) {
+  const id = params.id;
   const { user } = useAuth();
   const router = useRouter();
   const [match, setMatch] = useState<Match | null>(null);
