@@ -12,6 +12,7 @@ import Link from "next/link";
 interface Match {
   id: string;
   user_id: string;
+  opponent_id?: string;
   opponent_name: string;
   match_date: string;
   result: string | null;
@@ -60,12 +61,11 @@ const regionNames: { [key: string]: string } = {
 
 export default function MatchesClient() {
   const { user } = useAuth();
-  const [matches, setMatches] = useState<any[]>([]);
-  const [filteredMatches, setFilteredMatches] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [matches, setMatches] = useState<Match[]>([]);
+    const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [showJoinModal, setShowJoinModal] = useState(false);
-  const [selectedMatch, setSelectedMatch] = useState<any>(null);
+  const [selectedMatch, setSelectedMatch] = useState<Match | null>(null);
   const [userBalance, setUserBalance] = useState<number>(0);
   const [hasEpicAccount, setHasEpicAccount] = useState(false);
   const [selectedPlatform, setSelectedPlatform] = useState<string>('all');
@@ -112,7 +112,7 @@ export default function MatchesClient() {
         });
         if (response.ok) {
           const { linkedAccounts } = await response.json();
-          const epicAccount = linkedAccounts?.find((account: any) => account.provider === 'epic_games');
+          const epicAccount = linkedAccounts?.find((account: { provider: string }) => account.provider === 'epic_games');
           setHasEpicAccount(!!epicAccount);
         }
       }
@@ -248,7 +248,11 @@ export default function MatchesClient() {
   const confirmJoinMatch = async () => {
     if (!selectedMatch) return;
     
-    const entryFee = parseFloat(selectedMatch.entry_fee || selectedMatch.betting_amount || 0);
+    const entryFee = typeof selectedMatch.entry_fee === 'number'
+  ? selectedMatch.entry_fee
+  : typeof selectedMatch.betting_amount === 'number'
+    ? selectedMatch.betting_amount
+    : 0;
     
     console.log('Balance check:', {
       userBalance,

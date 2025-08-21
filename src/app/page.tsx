@@ -133,7 +133,7 @@ export default function Home() {
                                 <div className="single-leader">
                                     <div className="lefty">
                                         <span className="top">1</span>
-                                        <img src="assets/img/user.png" className="leaderimg"/>
+                                        <Image src="/assets/img/user.png" alt="User" width={40} height={40} className="leaderimg"/>
                                         <div className="leader-det">
                                             <span>Anwar VeNomX</span>
                                             <label>789 Matches</label>
@@ -146,7 +146,7 @@ export default function Home() {
                                 <div className="single-leader">
                                     <div className="lefty">
                                         <span className="top">2</span>
-                                        <img src="assets/img/user.png" className="leaderimg"/>
+                                        <Image src="/assets/img/user.png" alt="User" width={40} height={40} className="leaderimg"/>
                                         <div className="leader-det">
                                             <span>Anwar VeNomX</span>
                                             <label>789 Matches</label>
@@ -159,7 +159,7 @@ export default function Home() {
                                 <div className="single-leader">
                                     <div className="lefty">
                                         <span className="top">3</span>
-                                        <img src="assets/img/user.png" className="leaderimg"/>
+                                        <Image src="/assets/img/user.png" alt="User" width={40} height={40} className="leaderimg"/>
                                         <div className="leader-det">
                                             <span>Anwar VeNomX</span>
                                             <label>789 Matches</label>
@@ -172,7 +172,7 @@ export default function Home() {
                                 <div className="single-leader">
                                     <div className="lefty">
                                         <span className="top">4</span>
-                                        <img src="assets/img/user.png" className="leaderimg"/>
+                                        <Image src="/assets/img/user.png" alt="User" width={40} height={40} className="leaderimg"/>
                                         <div className="leader-det">
                                             <span>Anwar VeNomX</span>
                                             <label>789 Matches</label>
@@ -185,7 +185,7 @@ export default function Home() {
                                 <div className="single-leader">
                                     <div className="lefty">
                                         <span className="top">5</span>
-                                        <img src="assets/img/user.png" className="leaderimg"/>
+                                        <Image src="/assets/img/user.png" alt="User" width={40} height={40} className="leaderimg"/>
                                         <div className="leader-det">
                                             <span>Anwar VeNomX</span>
                                             <label>789 Matches</label>
@@ -198,7 +198,7 @@ export default function Home() {
                                 <div className="single-leader">
                                     <div className="lefty">
                                         <span className="top">6</span>
-                                        <img src="assets/img/user.png" className="leaderimg"/>
+                                        <Image src="/assets/img/user.png" alt="User" width={40} height={40} className="leaderimg"/>
                                         <div className="leader-det">
                                             <span>Anwar VeNomX</span>
                                             <label>789 Matches</label>
@@ -211,7 +211,7 @@ export default function Home() {
                                 <div className="single-leader">
                                     <div className="lefty">
                                         <span className="top">7</span>
-                                        <img src="assets/img/user.png" className="leaderimg"/>
+                                        <Image src="/assets/img/user.png" alt="User" width={40} height={40} className="leaderimg"/>
                                         <div className="leader-det">
                                             <span>Anwar VeNomX</span>
                                             <label>789 Matches</label>
