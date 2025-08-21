@@ -62,6 +62,7 @@ const regionNames: { [key: string]: string } = {
 };
 
 export default function MatchPage({ params }: { params: { id: string } }) {
+  const id = params.id;
   const { user } = useAuth();
   const router = useRouter();
   const [match, setMatch] = useState<Match | null>(null);
@@ -89,7 +90,7 @@ export default function MatchPage({ params }: { params: { id: string } }) {
     
     const fetchMatch = async () => {
       try {
-        const response = await fetch(`/api/matches/${params.id}`);
+        const response = await fetch(`/api/matches/${id}`);
         if (!response.ok) {
           throw new Error('Match not found');
         }
@@ -163,7 +164,7 @@ export default function MatchPage({ params }: { params: { id: string } }) {
     return () => {
       if (interval) clearInterval(interval);
     };
-  }, [params.id]);
+  }, [id]);
 
   // Epic username is now fetched from the match API response
 
