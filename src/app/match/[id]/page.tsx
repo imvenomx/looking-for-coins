@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Header from "@/components/Header";
 import SingleMatchCountdown from "@/components/SingleMatchCountdown";
 import MatchProgressBar from "@/components/MatchProgressBar";
@@ -61,16 +62,14 @@ const regionNames: { [key: string]: string } = {
   br: 'Brazil'
 };
 
-import dynamic from "next/dynamic";
-
-function MatchPageClient({ id }: { id: string }) {
+export default function MatchPage({ params }: { params: { id: string } }) {
   const { user } = useAuth();
   const router = useRouter();
   const [match, setMatch] = useState<Match | null>(null);
   const [loading, setLoading] = useState(true);
   const [profileLoading, setProfileLoading] = useState(true);
-  const [hostProfile, setHostProfile] = useState<Record<string, unknown> | null>(null);
-  const [opponentProfile, setOpponentProfile] = useState<Record<string, unknown> | null>(null);
+  const [hostProfile, setHostProfile] = useState<any>(null);
+  const [opponentProfile, setOpponentProfile] = useState<any>(null);
   const [isExpired, setIsExpired] = useState(false);
   const [epicUsername, setEpicUsername] = useState<string>('');
   const [hostEpicUsername, setHostEpicUsername] = useState<string>('');
@@ -88,15 +87,18 @@ function MatchPageClient({ id }: { id: string }) {
 
   useEffect(() => {
     document.body.classList.add("single-match");
+    
     const fetchMatch = async () => {
       try {
-        const response = await fetch(`/api/matches/${id}`);
+        const response = await fetch(`/api/matches/${params.id}`);
         if (!response.ok) {
           throw new Error('Match not found');
         }
         const data = await response.json();
         setMatch(data.match);
         setOpponentReady(data.match.opponent_ready || false);
+        
+        // Set host and opponent profiles from API response
         if (data.match.host) {
           setHostProfile(data.match.host);
           setProfileLoading(false);
@@ -104,8 +106,12 @@ function MatchPageClient({ id }: { id: string }) {
         if (data.match.opponent) {
           setOpponentProfile(data.match.opponent);
         }
+        
+        // Set Epic usernames from API response
+        
         if (data.match.host_epic_username) {
           setHostEpicUsername(data.match.host_epic_username);
+          // Always set epicUsername to host Epic username when user is the host
           if (user?.id === data.match.user_id) {
             setEpicUsername(data.match.host_epic_username);
           }
@@ -115,14 +121,18 @@ function MatchPageClient({ id }: { id: string }) {
             setEpicUsername('No Epic Account');
           }
         }
+        
         if (data.match.opponent_epic_username) {
           setOpponentEpicUsername(data.match.opponent_epic_username);
         } else {
           setOpponentEpicUsername('No Epic Account');
         }
+
+        // Set match started state based on status
         if (data.match.status === 'playing') {
           setMatchStarted(true);
         }
+        
         if (data.match.status === 'finished') {
           setResultStatus('finished');
           setGameOver(true);
@@ -130,6 +140,8 @@ function MatchPageClient({ id }: { id: string }) {
           setResultStatus('disputed');
           setGameOver(true);
         }
+        
+        // Check if current user has already submitted a result
         const currentUserId = user?.id;
         if (currentUserId === data.match.user_id && data.match.host_result) {
           setHasSubmittedResult(true);
@@ -142,22 +154,17 @@ function MatchPageClient({ id }: { id: string }) {
         setLoading(false);
       }
     };
+
     fetchMatch();
-    const interval = setInterval(fetchMatch, 3000);
+
+    // Set up polling for real-time updates
+    const interval = setInterval(fetchMatch, 3000); // Poll every 3 seconds
     setPollingInterval(interval);
+
     return () => {
       if (interval) clearInterval(interval);
     };
-  }, [id]);
-
-  return <div>Match Page for ID: {id}</div>;
-}
-
-export default async function MatchPage({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = await params;
-  return <MatchPageClient id={id} />;
-}
-  }, [id]);
+  }, [params.id]);
 
   // Epic username is now fetched from the match API response
 
@@ -178,7 +185,7 @@ export default async function MatchPage({ params }: { params: Promise<{ id: stri
       const newReadyState = !isReady;
       
       // Update ready state in database (you'll need to add a ready column to matches table)
-      const response = await fetch(`/api/matches/${id}/ready`, {
+      const response = await fetch(`/api/matches/${params.id}/ready`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -205,7 +212,7 @@ export default async function MatchPage({ params }: { params: Promise<{ id: stri
       const { data: { session } } = await supabase.auth.getSession();
       if (!session?.access_token) return;
       
-      const response = await fetch(`/api/matches/${id}/submit-result`, {
+      const response = await fetch(`/api/matches/${params.id}/submit-result`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -618,7 +625,7 @@ export default async function MatchPage({ params }: { params: Promise<{ id: stri
                                                                 const { data: { session } } = await supabase.auth.getSession();
                                                                 if (!session?.access_token) return;
                                                                 
-                                                                const response = await fetch(`/api/matches/${id}/start`, {
+                                                                const response = await fetch(`/api/matches/${params.id}/start`, {
                                                                     method: 'POST',
                                                                     headers: {
                                                                         'Content-Type': 'application/json',
