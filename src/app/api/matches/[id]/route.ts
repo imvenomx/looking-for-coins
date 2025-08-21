@@ -36,7 +36,7 @@ export async function GET(
       console.error('Database error:', error);
       return NextResponse.json({ error: 'Match not found' }, { status: 404 });
     }
-
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let hostProfile: any = null;
     let hostEpicUsername: string | null = null;
     let opponentProfile: any = null;
