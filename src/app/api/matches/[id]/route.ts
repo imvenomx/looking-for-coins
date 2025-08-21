@@ -16,7 +16,7 @@ const supabaseAdmin = createClient(
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: any }
+  { params }: { params: { id: string } }
 ) {
   try {
     const { id } = await params;
@@ -154,7 +154,7 @@ export async function GET(
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: any }
+  { params }: { params: { id: string } }
 ) {
   try {
     // Get the authorization header
