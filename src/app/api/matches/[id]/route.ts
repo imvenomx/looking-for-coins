@@ -39,6 +39,7 @@ export async function GET(
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let hostProfile: any = null;
     let hostEpicUsername: string | null = null;
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let opponentProfile: any = null;
     let opponentEpicUsername: string | null = null;
 
