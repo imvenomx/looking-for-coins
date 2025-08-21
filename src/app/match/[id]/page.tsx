@@ -1,4 +1,3 @@
-/*
 "use client";
 
 import Header from "@/components/Header";
@@ -570,7 +569,7 @@ export default async function MatchPage({ params }: { params: Promise<{ id: stri
                                         stopped={matchStarted}
                                       />
                                     )}
-
+                                    {/* Ready button for opponent (non-host) */}
                                     {user?.id !== match?.user_id && match?.opponent_name !== 'Waiting for opponent' && (
                                         <div className="ready-button-container" style={{ marginTop: '20px', textAlign: 'center' }}>
                                             <button
@@ -761,7 +760,7 @@ export default async function MatchPage({ params }: { params: Promise<{ id: stri
                                         </>
                                     )}
 
-                                
+                                {/* Result Submission Modal */}
                                 {showResultModal && (
                                     <div style={{
                                         position: 'fixed',
@@ -917,8 +916,4 @@ export default async function MatchPage({ params }: { params: Promise<{ id: stri
       </section>
     </>
   );
-}
-*/
-export default function MatchPage() {
-  return null;
 }
