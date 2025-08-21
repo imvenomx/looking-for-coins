@@ -8,7 +8,7 @@ interface LinkedAccount {
   username: string;
   email: string;
   linked_at: string;
-  profile_data: any;
+  profile_data: Record<string, unknown>;
 }
 
 export default function LinkedAccounts() {

@@ -26,7 +26,7 @@ export function useUserProfile(user: User | null) {
     setError(null);
 
     // Try to fetch
-    let { data, error } = await supabase
+    const { data, error } = await supabase
       .from('users')
       .select('*')
       .eq('id', user.id)

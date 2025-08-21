@@ -10,12 +10,12 @@ const Footer = () => {
             <div className="foot-sec">
                 <h4 className="footsec-title">About</h4>
                 <img src="/assets/img/logo.png" />
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&apos;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
             </div>
             <div className="foot-sec">
                 <h4 className="footsec-title">Features</h4>
                 <ul>
-                    <li><a href="/">Home</a></li>
+                    <li><Link href="/">Home</Link></li>
                     <li><a href="/matches">Matches</a></li>
                     <li><a href="/leaderboard">Leaderboard</a></li>
                     <li><a href="/profile">Profile</a></li>

@@ -1,7 +1,6 @@
 
 "use client";
 
-import Image from "next/image";
 import Header from "@/components/Header";
 import LinkedAccounts from "@/components/LinkedAccounts";
 
@@ -11,15 +10,15 @@ import Swal from 'sweetalert2';
 
 export default function MyAccount() {
 
-  const openTab2 = (event: React.MouseEvent, tabName: string) => {
-    const i: any = document.getElementsByClassName("teams-area");
-    for (let index = 0; index < i.length; index++) {
-      const element: any = i[index];
+  const openTab2 = (event: React.MouseEvent<HTMLElement>, tabName: string) => {
+    const teamsAreas = document.getElementsByClassName("teams-area") as HTMLCollectionOf<HTMLElement>;
+    for (let index = 0; index < teamsAreas.length; index++) {
+      const element = teamsAreas[index];
       element.style.display = "none";
     }
-    const active: any = document.getElementsByClassName("main-tabs");
-    for (let index = 0; index < active.length; index++) {
-      const element: any = active[index];
+    const mainTabs = document.getElementsByClassName("main-tabs") as HTMLCollectionOf<HTMLElement>;
+    for (let index = 0; index < mainTabs.length; index++) {
+      const element = mainTabs[index];
       element.className = element.className.replace(" active", "");
     }
     const tabElement = document.getElementById(tabName);
@@ -27,7 +26,6 @@ export default function MyAccount() {
       tabElement.style.display = "block";
     }
     event.currentTarget.className = "active";
-    
   };
 
   const [userId, setUserId] = useState<string | null>(null);

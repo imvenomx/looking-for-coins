@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Header from "@/components/Header";
 import SingleMatchCountdown from "@/components/SingleMatchCountdown";
 import MatchProgressBar from "@/components/MatchProgressBar";
@@ -68,8 +67,8 @@ export default function MatchPage({ params }: { params: { id: string } }) {
   const [match, setMatch] = useState<Match | null>(null);
   const [loading, setLoading] = useState(true);
   const [profileLoading, setProfileLoading] = useState(true);
-  const [hostProfile, setHostProfile] = useState<any>(null);
-  const [opponentProfile, setOpponentProfile] = useState<any>(null);
+  const [hostProfile, setHostProfile] = useState<Record<string, unknown> | null>(null);
+  const [opponentProfile, setOpponentProfile] = useState<Record<string, unknown> | null>(null);
   const [isExpired, setIsExpired] = useState(false);
   const [epicUsername, setEpicUsername] = useState<string>('');
   const [hostEpicUsername, setHostEpicUsername] = useState<string>('');
