@@ -1,22 +1,28 @@
+'use client';
 
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Header from "@/components/Header";
+import MatchesList from "@/components/MatchesList";
 
-export const metadata = {
-  title: "Looking For Coins",
-  description: "Compete in a variety of gamemodes such as box fights, build fights, and zone wars!",
-};
-
-export const viewport = {
-  width: "device-width",
-  initialScale: 1.0,
-};
 
 export default function Home() {
+  const [matches, setMatches] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch("/api/matches")
+      .then((res) => res.json())
+      .then((data) => {
+        setMatches(data.matches || []);
+        setLoading(false);
+      })
+      .catch(() => setLoading(false));
+  }, []);
+
   return (
     <>
       <Header showVideoBackground={true} />
-      
       <div className="content">
         {/* Streams Section */}
         <section className="streams">
@@ -71,57 +77,7 @@ export default function Home() {
                   <p>Discover and watch live matches between players on different gameplay modes fighting to win the prize.</p>
                 </div>
                 <div className="matchesloop">
-                  <div className="row">
-                    {[1, 2, 3, 4, 5, 6].map((match, index) => (
-                      <div key={index} className="singlematch">
-                        <h2>1V1 Box Fight</h2>
-                        <div className="matchcontent">
-                          <div className="countdown">
-                            <div className="base-timer">
-                              <svg className="base-timer__svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                                <g className="base-timer__circle">
-                                  <circle className="base-timer__path-elapsed" cx="50" cy="50" r="45"></circle>
-                                  <path id="base-timer-path-remaining" strokeDasharray="283" className="base-timer__path-remaining arc"
-                                        d="M 50, 50 m -45, 0 a 45,45 0 1,0 90,0 a 45,45 0 1,0 -90,0"></path>
-                                </g>
-                              </svg>
-                              <div className="timer-label">Expire in <br/><span id="base-timer-label" className="base-timer__label">30:00</span></div>
-                            </div>
-                          </div>
-                          <div className="joindetails">
-                                                <div className="matchdetails">
-                                                    <div className="single-det">
-                                                        <label>Region</label>
-                                                        <span>EU</span>
-                                                    </div>
-                                                    <div className="single-det">
-                                                        <label>Platform</label>
-                                                        <span>PC</span>
-                                                    </div>
-                                                    <div className="single-det">
-                                                        <label>First To</label>
-                                                        <span>5+2</span>
-                                                    </div>
-                                                    <div className="single-det">
-                                                        <label>Host</label>
-                                                        <span>RANDOM</span>
-                                                    </div>
-                                                    <div className="single-det">
-                                                        <label>Entry Fee</label>
-                                                        <span>$5.00</span>
-                                                    </div>
-                                                    <div className="single-det bet">
-                                                        <label>Prize</label>
-                                                        <span>$9.00</span>
-                                                    </div>
-                                                </div>
-                                                <span className="viewopponent"><i className="fa-solid fa-eye"></i>View opponent</span>
-                                                <a href="#" className="joinmatch mt-1">Join the match</a>
-                                            </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
+                  <MatchesList matches={matches} loading={loading} limit={6} />
                 </div>
               </div>
               <div className="leaderboard">
