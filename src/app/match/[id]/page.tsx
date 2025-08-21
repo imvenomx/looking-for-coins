@@ -919,3 +919,6 @@ export default async function MatchPage({ params }: { params: Promise<{ id: stri
   );
 }
 */
+export default function MatchPage() {
+  return null;
+}
